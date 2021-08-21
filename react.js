@@ -1,3 +1,5 @@
+"use strict"
+
 const flattenArray = (acc, el) => {
     if (Array.isArray(el)){
         return acc.concat(el)
@@ -9,6 +11,14 @@ const flattenArray = (acc, el) => {
 
 const React = {
     createElement: function (type, config, children) {
+        const props = {}
+        if (config !== null) {
+            for (const propName in config) {
+                if (config.hasOwnProperty(propName)) {
+                    props[propName] = config[propName]
+                }
+            }
+        }
         children = Array.from(arguments).slice(2).reduce(flattenArray, [])
         let element
         switch (typeof type) {
@@ -29,7 +39,7 @@ const React = {
             })
             break
             case "function":
-            const props = {children}
+            if (children.length > 0) props.children = children
             element = type(props)
             break
         }

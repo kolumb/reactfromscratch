@@ -1,3 +1,5 @@
+"use strict"
+
 const ReactDOM = {
     render: (element, container) => {
         while(container.firstChild) {
