@@ -1,4 +1,12 @@
+const Header = (props) => {
+    return props.children
+}
+
 const element = React.createElement("div", null,
+    React.createElement(Header, null, 
+        React.createElement("button", null, "Logo"),
+        "Header of the app"
+    ),
     React.createElement("h1", null, "Todo list:"),
     React.createElement("ul", null,
         React.createElement("li", null, "hello"),
