@@ -23,25 +23,29 @@ const React = {
         let element
         switch (typeof type) {
             case "string":
-            element = document.createElement(type)
-            children.forEach(child => {
-                switch (typeof child) {
-                    case "string":
-                    const text = document.createTextNode(child)
-                    element.appendChild(text)
-                    break
-                    case "object":
-                    if (child !== null) {
-                        element.appendChild(child)
+                element = document.createElement(type)
+                children.forEach(child => {
+                    switch (typeof child) {
+                        case "string":
+                            const text = document.createTextNode(child)
+                            element.appendChild(text)
+                            break
+                        case "object":
+                            if (child !== null) {
+                                element.appendChild(child)
+                            }
+                            break
                     }
-                    break
-                }
-            })
-            break
+                })
+                break
             case "function":
-            if (children.length > 0) props.children = children
-            element = type(props)
-            break
+                if (children.length > 0) props.children = children
+                element = type(props)
+                if (Array.isArray(element)) {
+                    console.error("React componen must return only one Element, not an array.")
+                    return
+                }
+                break
         }
         return element
     }

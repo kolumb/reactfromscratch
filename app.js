@@ -1,7 +1,7 @@
 "use strict"
 
 const Header = (props) => {
-    return props.children
+    return React.createElement("header", null, props.children)
 }
 
 const element = React.createElement("div", null,

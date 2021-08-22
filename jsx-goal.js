@@ -1,5 +1,7 @@
+
+
 const Header = (props) => {
-    return props.children
+    return <header> { props.children } </header>
 }
 
 const element = <div>
@@ -11,11 +13,11 @@ const element = <div>
     <ul>
         <li>hello</li>
         <li>world</li>
-
-            <li>This</li>
-            <li>is</li>
+        {[
+            <li>This</li>,
+            <li>is</li>,
             <li>array!</li>
-
+        ]}
     </ul>
     <footer>2021 kolumbetko</footer>
 </div>
