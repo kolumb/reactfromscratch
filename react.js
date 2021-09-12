@@ -10,7 +10,7 @@ const flattenArray = (acc, el) => {
 }
 
 const React = {
-    createElement: function (type, config, children) {
+    createElement: function (kind, config, children) {
         const props = {}
         if (config !== null) {
             for (const propName in config) {
@@ -20,33 +20,7 @@ const React = {
             }
         }
         children = Array.from(arguments).slice(2).reduce(flattenArray, [])
-        let element
-        switch (typeof type) {
-            case "string":
-                element = document.createElement(type)
-                children.forEach(child => {
-                    switch (typeof child) {
-                        case "string":
-                            const text = document.createTextNode(child)
-                            element.appendChild(text)
-                            break
-                        case "object":
-                            if (child !== null) {
-                                element.appendChild(child)
-                            }
-                            break
-                    }
-                })
-                break
-            case "function":
-                if (children.length > 0) props.children = children
-                element = type(props)
-                if (Array.isArray(element)) {
-                    console.error("React componen must return only one Element, not an array.")
-                    return
-                }
-                break
-        }
-        return element
+
+        return {kind, props, children}
     }
 }
