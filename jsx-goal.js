@@ -5,12 +5,12 @@ const Header = (props) => {
 }
 
 const element = <div>
-    <Header>
+    <Header className="header">
         <button>Logo</button>
         Header of the app
     </Header>
     <h1>Todo list:</h1>
-    <ul>
+    <ul className="list">
         <li>hello</li>
         <li>world</li>
         {[
